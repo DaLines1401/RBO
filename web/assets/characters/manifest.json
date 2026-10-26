@@ -5,9 +5,6 @@
       "class": "SWORDMAN",
       "gender": "M",
       "name": "Swordman (ชาย)",
-      "title": "นักดาบหนุ่มผู้กล้าหาญ",
-      "description": "พลังป้องกันและพลังโจมตีกายภาพสูง เหมาะกับการลุยเดี่ยวและทำคอมโบหนักหน่วง",
-      "stats": { "str": 85, "agi": 60, "vit": 90, "int": 25, "dex": 55, "luk": 40 },
       "baseHp": 1350,
       "baseSp": 220,
       "sheets": [
@@ -15,19 +12,14 @@
         "assets/characters/swd_m_sheet_1.png",
         "assets/characters/swd_m_sheet_2.png"
       ],
-      "skills": [
-        { "id": "BASH", "name": "Bash (ฟันกระแทก)", "command": "↓ ↘ → + Light", "shortcut": "Space / A", "sp": 25, "damage": 380 },
-        { "id": "MAGNUM", "name": "Magnum Break (ระเบิดไฟ)", "command": "↓ ↑ + Heavy", "shortcut": "U / S", "sp": 45, "damage": 550 }
-      ]
+      "posesData": "assets/characters/swd_m_poses.json",
+      "poseCount": 435
     },
     "SWD_F": {
       "id": "SWD_F",
       "class": "SWORDMAN",
       "gender": "F",
       "name": "Swordman (หญิง)",
-      "title": "นักดาบสาวผู้ปราดเปรียว",
-      "description": "มีความเร็วการฟันและพุ่งตัวที่ว่องไว ออกคอมโบต่อเนื่องได้รวดเร็วกว่าสายชาย",
-      "stats": { "str": 80, "agi": 75, "vit": 75, "int": 30, "dex": 65, "luk": 45 },
       "baseHp": 1250,
       "baseSp": 240,
       "sheets": [
@@ -35,19 +27,14 @@
         "assets/characters/swd_f_sheet_1.png",
         "assets/characters/swd_f_sheet_2.png"
       ],
-      "skills": [
-        { "id": "BASH", "name": "Bash (ฟันกระแทก)", "command": "↓ ↘ → + Light", "shortcut": "Space / A", "sp": 25, "damage": 360 },
-        { "id": "MAGNUM", "name": "Magnum Break (ระเบิดไฟ)", "command": "↓ ↑ + Heavy", "shortcut": "U / S", "sp": 45, "damage": 530 }
-      ]
+      "posesData": "assets/characters/swd_f_poses.json",
+      "poseCount": 425
     },
     "ACO_M": {
       "id": "ACO_M",
       "class": "ACOLYTE",
       "gender": "M",
       "name": "Acolyte (ชาย)",
-      "title": "นักบวชสายประชิด (Battle Priest)",
-      "description": "ใช้เพลงหมัดอันทรงพลัง ผสานพลังเวทศักดิ์สิทธิ์และการชุบชีวิตเพื่อนร่วมทีม",
-      "stats": { "str": 70, "agi": 65, "vit": 70, "int": 80, "dex": 60, "luk": 50 },
       "baseHp": 1150,
       "baseSp": 340,
       "sheets": [
@@ -55,19 +42,14 @@
         "assets/characters/aco_m_sheet_1.png",
         "assets/characters/aco_m_sheet_2.png"
       ],
-      "skills": [
-        { "id": "HOLY_LIGHT", "name": "Holy Light (แสงศักดิ์สิทธิ์)", "command": "↓ ↘ → + Light", "shortcut": "Space / A", "sp": 20, "damage": 310 },
-        { "id": "HEAL", "name": "Heal & Angelus (ฮีลและชุบ)", "command": "↓ ↑ + Heavy", "shortcut": "U / S", "sp": 40, "damage": 0 }
-      ]
+      "posesData": "assets/characters/aco_m_poses.json",
+      "poseCount": 404
     },
     "ACO_F": {
       "id": "ACO_F",
       "class": "ACOLYTE",
       "gender": "F",
       "name": "Acolyte (หญิง)",
-      "title": "นักบวชสาวผู้เปี่ยมศรัทธา",
-      "description": "มีปริมาณ SP สูงสุดในสายเริ่มต้น สามารถฟื้นฟูเลือดและบัฟเกราะให้เพื่อนได้อย่างต่อเนื่อง",
-      "stats": { "str": 60, "agi": 60, "vit": 65, "int": 95, "dex": 65, "luk": 60 },
       "baseHp": 1100,
       "baseSp": 380,
       "sheets": [
@@ -75,10 +57,158 @@
         "assets/characters/aco_f_sheet_1.png",
         "assets/characters/aco_f_sheet_2.png"
       ],
-      "skills": [
-        { "id": "HOLY_LIGHT", "name": "Holy Light (แสงศักดิ์สิทธิ์)", "command": "↓ ↘ → + Light", "shortcut": "Space / A", "sp": 20, "damage": 330 },
-        { "id": "HEAL", "name": "Heal & Angelus (ฮีลและชุบ)", "command": "↓ ↑ + Heavy", "shortcut": "U / S", "sp": 40, "damage": 0 }
-      ]
+      "posesData": "assets/characters/aco_f_poses.json",
+      "poseCount": 467
+    },
+    "ARC_M": {
+      "id": "ARC_M",
+      "class": "ARCHER",
+      "gender": "M",
+      "name": "Archer (ชาย)",
+      "baseHp": 1100,
+      "baseSp": 280,
+      "sheets": [
+        "assets/characters/arc_m_sheet_0.png",
+        "assets/characters/arc_m_sheet_1.png",
+        "assets/characters/arc_m_sheet_2.png"
+      ],
+      "posesData": "assets/characters/arc_m_poses.json",
+      "poseCount": 489
+    },
+    "ARC_F": {
+      "id": "ARC_F",
+      "class": "ARCHER",
+      "gender": "F",
+      "name": "Archer (หญิง)",
+      "baseHp": 1050,
+      "baseSp": 300,
+      "sheets": [
+        "assets/characters/arc_f_sheet_0.png",
+        "assets/characters/arc_f_sheet_1.png",
+        "assets/characters/arc_f_sheet_2.png"
+      ],
+      "posesData": "assets/characters/arc_f_poses.json",
+      "poseCount": 398
+    },
+    "MAG_M": {
+      "id": "MAG_M",
+      "class": "MAGICIAN",
+      "gender": "M",
+      "name": "Magician (ชาย)",
+      "baseHp": 950,
+      "baseSp": 450,
+      "sheets": [
+        "assets/characters/mag_m_sheet_0.png",
+        "assets/characters/mag_m_sheet_1.png",
+        "assets/characters/mag_m_sheet_2.png"
+      ],
+      "posesData": "assets/characters/mag_m_poses.json",
+      "poseCount": 430
+    },
+    "MAG_F": {
+      "id": "MAG_F",
+      "class": "MAGICIAN",
+      "gender": "F",
+      "name": "Magician (หญิง)",
+      "baseHp": 900,
+      "baseSp": 480,
+      "sheets": [
+        "assets/characters/mag_f_sheet_0.png",
+        "assets/characters/mag_f_sheet_1.png",
+        "assets/characters/mag_f_sheet_2.png"
+      ],
+      "posesData": "assets/characters/mag_f_poses.json",
+      "poseCount": 381
+    },
+    "THF_M": {
+      "id": "THF_M",
+      "class": "THIEF",
+      "gender": "M",
+      "name": "Thief (ชาย)",
+      "baseHp": 1180,
+      "baseSp": 230,
+      "sheets": [
+        "assets/characters/thf_m_sheet_0.png",
+        "assets/characters/thf_m_sheet_1.png",
+        "assets/characters/thf_m_sheet_2.png"
+      ],
+      "posesData": "assets/characters/thf_m_poses.json",
+      "poseCount": 373
+    },
+    "THF_F": {
+      "id": "THF_F",
+      "class": "THIEF",
+      "gender": "F",
+      "name": "Thief (หญิง)",
+      "baseHp": 1120,
+      "baseSp": 250,
+      "sheets": [
+        "assets/characters/thf_f_sheet_0.png",
+        "assets/characters/thf_f_sheet_1.png",
+        "assets/characters/thf_f_sheet_2.png"
+      ],
+      "posesData": "assets/characters/thf_f_poses.json",
+      "poseCount": 470
+    },
+    "MRC_M": {
+      "id": "MRC_M",
+      "class": "MERCHANT",
+      "gender": "M",
+      "name": "Merchant (ชาย)",
+      "baseHp": 1300,
+      "baseSp": 260,
+      "sheets": [
+        "assets/characters/mrc_m_sheet_0.png",
+        "assets/characters/mrc_m_sheet_1.png",
+        "assets/characters/mrc_m_sheet_2.png"
+      ],
+      "posesData": "assets/characters/mrc_m_poses.json",
+      "poseCount": 612
+    },
+    "MRC_F": {
+      "id": "MRC_F",
+      "class": "MERCHANT",
+      "gender": "F",
+      "name": "Merchant (หญิง)",
+      "baseHp": 1240,
+      "baseSp": 270,
+      "sheets": [
+        "assets/characters/mrc_f_sheet_0.png",
+        "assets/characters/mrc_f_sheet_1.png",
+        "assets/characters/mrc_f_sheet_2.png"
+      ],
+      "posesData": "assets/characters/mrc_f_poses.json",
+      "poseCount": 542
+    },
+    "NOV_M": {
+      "id": "NOV_M",
+      "class": "NOVICE",
+      "gender": "M",
+      "name": "Novice (ชาย)",
+      "baseHp": 1000,
+      "baseSp": 200,
+      "sheets": [
+        "assets/characters/nov_m_sheet_0.png",
+        "assets/characters/nov_m_sheet_1.png",
+        "assets/characters/nov_m_sheet_2.png"
+      ],
+      "posesData": "assets/characters/nov_m_poses.json",
+      "poseCount": 402
+    },
+    "NOV_F": {
+      "id": "NOV_F",
+      "class": "NOVICE",
+      "gender": "F",
+      "name": "Novice (หญิง)",
+      "baseHp": 950,
+      "baseSp": 210,
+      "sheets": [
+        "assets/characters/nov_f_sheet_0.png",
+        "assets/characters/nov_f_sheet_1.png",
+        "assets/characters/nov_f_sheet_2.png"
+      ],
+      "posesData": "assets/characters/nov_f_poses.json",
+      "poseCount": 460
     }
   }
 }

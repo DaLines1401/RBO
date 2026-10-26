@@ -991,3 +991,203 @@ main {
   font-family: monospace;
   font-size: 0.75rem;
 }
+
+/* ========================================================
+   PacNyx Sprite & Pose Inspector Styles
+   ======================================================== */
+.studio-subnav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #232c3d;
+  padding-bottom: 10px;
+}
+
+.studio-tab-btn {
+  background: #141a24;
+  color: #94a3b8;
+  border: 1px solid #2e3b52;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.studio-tab-btn:hover {
+  background: #1e2738;
+  color: #fff;
+  border-color: #475569;
+}
+
+.studio-tab-btn.active {
+  background: #202b3f;
+  color: var(--primary-gold);
+  border-color: var(--primary-gold);
+  box-shadow: 0 0 12px rgba(226, 176, 74, 0.2);
+}
+
+.pacnyx-inspector-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 20px;
+  width: 100%;
+  min-height: calc(100vh - 160px);
+}
+
+.pacnyx-sidebar {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: calc(100vh - 160px);
+}
+
+.pose-info-bar {
+  padding: 8px 12px;
+  background: #121722;
+  border-bottom: 1px solid #242c3d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+#poseCountBadge {
+  background: #1e2838;
+  color: #38bdf8;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+#poseCurrentName {
+  color: var(--primary-gold);
+  font-family: monospace;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.pacnyx-main {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 18px;
+  gap: 16px;
+  max-height: calc(100vh - 160px);
+}
+
+.inspector-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #121722;
+  border: 1px solid #242c3d;
+  border-radius: 8px;
+  padding: 10px 16px;
+}
+
+.anim-controls, .zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#btnAnimPlay.playing {
+  background: #e53935;
+  color: #fff;
+  border-color: #ef5350;
+}
+
+.canvas-viewport-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f121a;
+  border: 2px solid #263145;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+  min-height: 380px;
+}
+
+#pacnyxCanvas {
+  background: #161922;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+  image-rendering: pixelated;
+}
+
+.bodyparts-card {
+  background: #121722;
+  border: 1px solid #242c3d;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.bodyparts-card h4 {
+  font-size: 0.9rem;
+  color: var(--primary-gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.parts-table-wrap {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid #1e2638;
+  border-radius: 6px;
+}
+
+.parts-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.parts-table th {
+  background: #1a2233;
+  color: #94a3b8;
+  padding: 8px 10px;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid #2a374e;
+  font-weight: 600;
+}
+
+.parts-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #192131;
+  color: #cbd5e1;
+}
+
+.parts-table tr:hover {
+  background: #182236;
+}
+
+@media (max-width: 900px) {
+  .pacnyx-inspector-layout {
+    grid-template-columns: 1fr;
+  }
+  .pacnyx-sidebar {
+    max-height: 320px;
+  }
+}

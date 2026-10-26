@@ -3,72 +3,130 @@
  */
 const CHARACTER_DEFS = {
   SWD_M: {
-    id: 'SWD_M',
-    class: 'SWORDMAN',
-    gender: 'M',
-    name: 'Swordman (ชาย)',
-    title: 'นักดาบหนุ่มผู้กล้าหาญ',
-    baseHp: 1350,
-    baseSp: 220,
+    id: 'SWD_M', class: 'SWORDMAN', gender: 'M',
+    name: 'Swordman (ชาย)', title: 'นักดาบหนุ่มผู้กล้าหาญ',
+    baseHp: 1350, baseSp: 220,
     str: 85, agi: 60, vit: 90, int: 25, dex: 55, luk: 40,
     sheetPrefix: 'swd_m_sheet_',
-    skill1Name: 'BASH Lv.10!',
-    skill2Name: 'MAGNUM BREAK!!',
-    skill1Dmg: 380,
-    skill2Dmg: 550,
-    skill1Sp: 25,
-    skill2Sp: 45
+    skill1Name: 'BASH Lv.10!', skill2Name: 'MAGNUM BREAK!!',
+    skill1Dmg: 380, skill2Dmg: 550, skill1Sp: 25, skill2Sp: 45
   },
   SWD_F: {
-    id: 'SWD_F',
-    class: 'SWORDMAN',
-    gender: 'F',
-    name: 'Swordman (หญิง)',
-    title: 'นักดาบสาวผู้ปราดเปรียว',
-    baseHp: 1250,
-    baseSp: 240,
+    id: 'SWD_F', class: 'SWORDMAN', gender: 'F',
+    name: 'Swordman (หญิง)', title: 'นักดาบสาวผู้ปราดเปรียว',
+    baseHp: 1250, baseSp: 240,
     str: 80, agi: 75, vit: 75, int: 30, dex: 65, luk: 45,
     sheetPrefix: 'swd_f_sheet_',
-    skill1Name: 'SWIFT BASH!',
-    skill2Name: 'MAGNUM BREAK!!',
-    skill1Dmg: 360,
-    skill2Dmg: 530,
-    skill1Sp: 25,
-    skill2Sp: 45
+    skill1Name: 'SWIFT BASH!', skill2Name: 'MAGNUM BREAK!!',
+    skill1Dmg: 360, skill2Dmg: 530, skill1Sp: 25, skill2Sp: 45
   },
   ACO_M: {
-    id: 'ACO_M',
-    class: 'ACOLYTE',
-    gender: 'M',
-    name: 'Acolyte (ชาย)',
-    title: 'นักบวชสายประชิด (Battle Monk)',
-    baseHp: 1150,
-    baseSp: 340,
+    id: 'ACO_M', class: 'ACOLYTE', gender: 'M',
+    name: 'Acolyte (ชาย)', title: 'นักบวชสายประชิด (Battle Monk)',
+    baseHp: 1150, baseSp: 340,
     str: 70, agi: 65, vit: 70, int: 80, dex: 60, luk: 50,
     sheetPrefix: 'aco_m_sheet_',
-    skill1Name: 'HOLY LIGHT!',
-    skill2Name: 'HEAL & ANGELUS',
-    skill1Dmg: 310,
-    skill2Dmg: 0,
-    skill1Sp: 20,
-    skill2Sp: 40
+    skill1Name: 'HOLY LIGHT!', skill2Name: 'HEAL & ANGELUS',
+    skill1Dmg: 310, skill2Dmg: 0, skill1Sp: 20, skill2Sp: 40
   },
   ACO_F: {
-    id: 'ACO_F',
-    class: 'ACOLYTE',
-    gender: 'F',
-    name: 'Acolyte (หญิง)',
-    title: 'นักบวชสาวผู้เปี่ยมศรัทธา',
-    baseHp: 1100,
-    baseSp: 380,
+    id: 'ACO_F', class: 'ACOLYTE', gender: 'F',
+    name: 'Acolyte (หญิง)', title: 'นักบวชสาวผู้เปี่ยมศรัทธา',
+    baseHp: 1100, baseSp: 380,
     str: 60, agi: 60, vit: 65, int: 95, dex: 65, luk: 60,
     sheetPrefix: 'aco_f_sheet_',
-    skill1Name: 'DIVINE LIGHT!',
-    skill2Name: 'HEAL & ANGELUS',
-    skill1Dmg: 330,
-    skill2Dmg: 0,
-    skill1Sp: 20,
-    skill2Sp: 40
+    skill1Name: 'DIVINE LIGHT!', skill2Name: 'HEAL & ANGELUS',
+    skill1Dmg: 330, skill2Dmg: 0, skill1Sp: 20, skill2Sp: 40
+  },
+  ARC_M: {
+    id: 'ARC_M', class: 'ARCHER', gender: 'M',
+    name: 'Archer (ชาย)', title: 'นักธนูผู้แม่นยำ',
+    baseHp: 1100, baseSp: 280,
+    str: 65, agi: 80, vit: 60, int: 40, dex: 90, luk: 55,
+    sheetPrefix: 'arc_m_sheet_',
+    skill1Name: 'DOUBLE STRAFE!', skill2Name: 'ARROW SHOWER!!',
+    skill1Dmg: 350, skill2Dmg: 480, skill1Sp: 22, skill2Sp: 40
+  },
+  ARC_F: {
+    id: 'ARC_F', class: 'ARCHER', gender: 'F',
+    name: 'Archer (หญิง)', title: 'นักธนูสาวแห่งพงไพร',
+    baseHp: 1050, baseSp: 300,
+    str: 60, agi: 85, vit: 55, int: 45, dex: 92, luk: 60,
+    sheetPrefix: 'arc_f_sheet_',
+    skill1Name: 'DOUBLE STRAFE!', skill2Name: 'ARROW SHOWER!!',
+    skill1Dmg: 340, skill2Dmg: 470, skill1Sp: 22, skill2Sp: 40
+  },
+  MAG_M: {
+    id: 'MAG_M', class: 'MAGICIAN', gender: 'M',
+    name: 'Magician (ชาย)', title: 'จอมเวทผู้ทรงปัญญา',
+    baseHp: 950, baseSp: 450,
+    str: 40, agi: 55, vit: 50, int: 98, dex: 70, luk: 50,
+    sheetPrefix: 'mag_m_sheet_',
+    skill1Name: 'FIRE BALL!', skill2Name: 'THUNDER STORM!!',
+    skill1Dmg: 420, skill2Dmg: 600, skill1Sp: 30, skill2Sp: 55
+  },
+  MAG_F: {
+    id: 'MAG_F', class: 'MAGICIAN', gender: 'F',
+    name: 'Magician (หญิง)', title: 'แม่มดน้อยพลังเวทสูง',
+    baseHp: 900, baseSp: 480,
+    str: 35, agi: 60, vit: 45, int: 100, dex: 75, luk: 55,
+    sheetPrefix: 'mag_f_sheet_',
+    skill1Name: 'SOUL STRIKE!', skill2Name: 'THUNDER STORM!!',
+    skill1Dmg: 410, skill2Dmg: 590, skill1Sp: 28, skill2Sp: 55
+  },
+  THF_M: {
+    id: 'THF_M', class: 'THIEF', gender: 'M',
+    name: 'Thief (ชาย)', title: 'จอมโจรเงาผู้รวดเร็ว',
+    baseHp: 1180, baseSp: 230,
+    str: 75, agi: 95, vit: 60, int: 30, dex: 80, luk: 65,
+    sheetPrefix: 'thf_m_sheet_',
+    skill1Name: 'DOUBLE ATTACK!', skill2Name: 'ENVENOM & LEAP!!',
+    skill1Dmg: 340, skill2Dmg: 460, skill1Sp: 20, skill2Sp: 35
+  },
+  THF_F: {
+    id: 'THF_F', class: 'THIEF', gender: 'F',
+    name: 'Thief (หญิง)', title: 'นางโจรสาวสะบัดมีด',
+    baseHp: 1120, baseSp: 250,
+    str: 70, agi: 98, vit: 55, int: 35, dex: 82, luk: 70,
+    sheetPrefix: 'thf_f_sheet_',
+    skill1Name: 'DOUBLE ATTACK!', skill2Name: 'ENVENOM & LEAP!!',
+    skill1Dmg: 330, skill2Dmg: 450, skill1Sp: 20, skill2Sp: 35
+  },
+  MRC_M: {
+    id: 'MRC_M', class: 'MERCHANT', gender: 'M',
+    name: 'Merchant (ชาย)', title: 'พ่อค้าจอมพลังหมัดหนัก',
+    baseHp: 1300, baseSp: 260,
+    str: 88, agi: 55, vit: 85, int: 35, dex: 60, luk: 60,
+    sheetPrefix: 'mrc_m_sheet_',
+    skill1Name: 'MAMMONITE!', skill2Name: 'CART REVOLUTION!!',
+    skill1Dmg: 440, skill2Dmg: 560, skill1Sp: 25, skill2Sp: 45
+  },
+  MRC_F: {
+    id: 'MRC_F', class: 'MERCHANT', gender: 'F',
+    name: 'Merchant (หญิง)', title: 'แม่ค้าสาวเสน่ห์แรง',
+    baseHp: 1240, baseSp: 270,
+    str: 82, agi: 60, vit: 80, int: 40, dex: 65, luk: 65,
+    sheetPrefix: 'mrc_f_sheet_',
+    skill1Name: 'MAMMONITE!', skill2Name: 'CART REVOLUTION!!',
+    skill1Dmg: 420, skill2Dmg: 540, skill1Sp: 25, skill2Sp: 45
+  },
+  NOV_M: {
+    id: 'NOV_M', class: 'NOVICE', gender: 'M',
+    name: 'Novice (ชาย)', title: 'ผู้เริ่มต้นผู้ไม่ยอมแพ้',
+    baseHp: 1000, baseSp: 200,
+    str: 50, agi: 50, vit: 50, int: 50, dex: 50, luk: 80,
+    sheetPrefix: 'nov_m_sheet_',
+    skill1Name: 'THROW SHOE!', skill2Name: 'PLAY DEAD (HEAL)!',
+    skill1Dmg: 280, skill2Dmg: 0, skill1Sp: 15, skill2Sp: 30
+  },
+  NOV_F: {
+    id: 'NOV_F', class: 'NOVICE', gender: 'F',
+    name: 'Novice (หญิง)', title: 'สาวน้อยผู้เริ่มต้น',
+    baseHp: 950, baseSp: 210,
+    str: 48, agi: 52, vit: 48, int: 52, dex: 52, luk: 85,
+    sheetPrefix: 'nov_f_sheet_',
+    skill1Name: 'THROW SHOE!', skill2Name: 'PLAY DEAD (HEAL)!',
+    skill1Dmg: 270, skill2Dmg: 0, skill1Sp: 15, skill2Sp: 30
   }
 };
 
@@ -234,6 +292,16 @@ class RBOEngine {
       { type: 'image', key: 'swd_f_sheet_0', url: 'assets/characters/swd_f_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
       { type: 'image', key: 'aco_m_sheet_0', url: 'assets/characters/aco_m_sheet_0.png', fallback: 'assets/sprites/aco_paletted_test.png' },
       { type: 'image', key: 'aco_f_sheet_0', url: 'assets/characters/aco_f_sheet_0.png', fallback: 'assets/sprites/aco_paletted_test.png' },
+      { type: 'image', key: 'arc_m_sheet_0', url: 'assets/characters/arc_m_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'arc_f_sheet_0', url: 'assets/characters/arc_f_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'mag_m_sheet_0', url: 'assets/characters/mag_m_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'mag_f_sheet_0', url: 'assets/characters/mag_f_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'thf_m_sheet_0', url: 'assets/characters/thf_m_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'thf_f_sheet_0', url: 'assets/characters/thf_f_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'mrc_m_sheet_0', url: 'assets/characters/mrc_m_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'mrc_f_sheet_0', url: 'assets/characters/mrc_f_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'nov_m_sheet_0', url: 'assets/characters/nov_m_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
+      { type: 'image', key: 'nov_f_sheet_0', url: 'assets/characters/nov_f_sheet_0.png', fallback: 'assets/sprites/swd_paletted_test.png' },
       { type: 'image', key: 'aco_tex', url: 'assets/sprites/aco_paletted_test.png' },
       { type: 'image', key: 'caution', url: 'assets/ui/stage_caution.png' },
       { type: 'audio', key: 'bgm_stage1', url: 'assets/audio/bgm_stage1.wav' },
@@ -889,7 +957,7 @@ class RBOEngine {
       }
     }
 
-    // Skill 1 (Bash / Holy Light)
+    // Skill 1 (Bash / Double Strafe / Fire Ball / Double Attack / Mammonite / Throw Shoe / Holy Light)
     const s1Cost = p.charaDef?.skill1Sp || 25;
     if (triggerSkill1 && p.attackCooldown === 0 && p.sp >= s1Cost && canMove) {
       p.sp -= s1Cost;
@@ -903,6 +971,35 @@ class RBOEngine {
         const dmg = p.charaDef?.skill1Dmg || 380;
         this.performAttack(p, { damage: dmg, reach: 110, knockback: 14.0, launch: -13.5, hitStop: 12 });
         this.addDamageNumber(p.x, p.y - 75, p.charaDef?.skill1Name || 'BASH Lv.10!', '#ffeb3b');
+      } else if (p.chara === 'ARCHER') {
+        this.playSound('swing1');
+        this.screenShake = 5;
+        const dmg = p.charaDef?.skill1Dmg || 350;
+        this.performAttack(p, { damage: dmg, reach: 320, knockback: 10.0, launch: -6.0, hitStop: 8 });
+        this.addDamageNumber(p.x, p.y - 75, p.charaDef?.skill1Name || 'DOUBLE STRAFE!', '#81d4fa');
+      } else if (p.chara === 'MAGICIAN') {
+        this.playSound('magnum');
+        this.screenShake = 7;
+        const dmg = p.charaDef?.skill1Dmg || 420;
+        this.performAttack(p, { damage: dmg, reach: 280, knockback: 12.0, launch: -10.0, hitStop: 10, aoe: true });
+        this.addDamageNumber(p.x, p.y - 75, p.charaDef?.skill1Name || 'FIRE BALL!', '#ff7043');
+      } else if (p.chara === 'THIEF') {
+        this.playSound('hit2');
+        this.screenShake = 4;
+        const dmg = p.charaDef?.skill1Dmg || 340;
+        this.performAttack(p, { damage: dmg, reach: 95, knockback: 7.0, launch: -5.0, hitStop: 6 });
+        this.addDamageNumber(p.x, p.y - 75, p.charaDef?.skill1Name || 'DOUBLE ATTACK!', '#b388ff');
+      } else if (p.chara === 'MERCHANT') {
+        this.playSound('item');
+        this.screenShake = 8;
+        const dmg = p.charaDef?.skill1Dmg || 440;
+        this.performAttack(p, { damage: dmg, reach: 110, knockback: 16.0, launch: -12.0, hitStop: 12 });
+        this.addDamageNumber(p.x, p.y - 75, p.charaDef?.skill1Name || 'MAMMONITE!', '#ffd54f');
+      } else if (p.chara === 'NOVICE') {
+        this.playSound('hit1');
+        const dmg = p.charaDef?.skill1Dmg || 280;
+        this.performAttack(p, { damage: dmg, reach: 220, knockback: 6.0, launch: -4.0, hitStop: 6 });
+        this.addDamageNumber(p.x, p.y - 75, p.charaDef?.skill1Name || 'THROW SHOE!', '#ffb74d');
       } else {
         // Acolyte: Holy Light / Angelus & Team Revive!
         this.playSound('levelup');
@@ -910,7 +1007,6 @@ class RBOEngine {
         this.performAttack(p, { damage: dmg, reach: 140, knockback: 8.0, launch: -6.0, hitStop: 8 });
         this.addDamageNumber(p.x, p.y - 75, p.charaDef?.skill1Name || 'HOLY LIGHT!', '#80d8ff');
 
-        // Check if ally is KO nearby and revive them!
         this.players.forEach(ally => {
           if (ally.id !== p.id && ally.state === 'KO' && Math.abs(ally.x - p.x) < 140) {
             ally.state = 'IDLE';
@@ -922,7 +1018,7 @@ class RBOEngine {
       }
     }
 
-    // Skill 2 (Magnum Break / Heal)
+    // Skill 2 (Magnum Break / Arrow Shower / Thunder Storm / Envenom / Cart Revolution / Play Dead / Heal)
     const s2Cost = p.charaDef?.skill2Sp || 45;
     if (triggerSkill2 && p.attackCooldown === 0 && p.sp >= s2Cost && canMove) {
       p.sp -= s2Cost;
@@ -936,11 +1032,40 @@ class RBOEngine {
         const dmg = p.charaDef?.skill2Dmg || 550;
         this.performAttack(p, { damage: dmg, reach: 180, knockback: 18.0, launch: -14.0, hitStop: 16, aoe: true });
         this.addDamageNumber(p.x, p.y - 85, p.charaDef?.skill2Name || 'MAGNUM BREAK!!', '#ff5722');
+      } else if (p.chara === 'ARCHER') {
+        this.playSound('swing3');
+        this.screenShake = 10;
+        const dmg = p.charaDef?.skill2Dmg || 480;
+        this.performAttack(p, { damage: dmg, reach: 260, knockback: 14.0, launch: -12.0, hitStop: 12, aoe: true });
+        this.addDamageNumber(p.x, p.y - 85, p.charaDef?.skill2Name || 'ARROW SHOWER!!', '#4fc3f7');
+      } else if (p.chara === 'MAGICIAN') {
+        this.playSound('magnum');
+        this.screenShake = 16;
+        const dmg = p.charaDef?.skill2Dmg || 600;
+        this.performAttack(p, { damage: dmg, reach: 300, knockback: 20.0, launch: -15.0, hitStop: 16, aoe: true });
+        this.addDamageNumber(p.x, p.y - 85, p.charaDef?.skill2Name || 'THUNDER STORM!!', '#ea80fc');
+      } else if (p.chara === 'THIEF') {
+        this.playSound('hit3');
+        this.screenShake = 9;
+        p.vx = -p.facing * 9.0;
+        const dmg = p.charaDef?.skill2Dmg || 460;
+        this.performAttack(p, { damage: dmg, reach: 130, knockback: 12.0, launch: -8.0, hitStop: 10 });
+        this.addDamageNumber(p.x, p.y - 85, p.charaDef?.skill2Name || 'ENVENOM & LEAP!!', '#69f0ae');
+      } else if (p.chara === 'MERCHANT') {
+        this.playSound('magnum');
+        this.screenShake = 15;
+        const dmg = p.charaDef?.skill2Dmg || 560;
+        this.performAttack(p, { damage: dmg, reach: 200, knockback: 20.0, launch: -14.0, hitStop: 16, aoe: true });
+        this.addDamageNumber(p.x, p.y - 85, p.charaDef?.skill2Name || 'CART REVOLUTION!!', '#ffca28');
+      } else if (p.chara === 'NOVICE') {
+        this.playSound('levelup');
+        p.hp = Math.min(p.maxHp, p.hp + 300);
+        this.addDamageNumber(p.x, p.y - 80, '+300 HP (PLAY DEAD)', '#a7ffeb');
       } else {
+        // Acolyte: Heal & Angelus
         this.playSound('levelup');
         p.hp = Math.min(p.maxHp, p.hp + 450);
         this.addDamageNumber(p.x, p.y - 80, '+450 HP (HEAL)', '#69f0ae');
-        // Heal nearby teammates too
         this.players.forEach(ally => {
           if (ally.id !== p.id && ally.state !== 'KO' && Math.abs(ally.x - p.x) < 220) {
             ally.hp = Math.min(ally.maxHp, ally.hp + 350);
