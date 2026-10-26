@@ -1,0 +1,49 @@
+# Ragnarok Battle Offline Web - Git Ignore Configuration
+
+# Exclude original game data folder (2.5 GB)
+DATA/
+manual/
+manual_ex1/
+manual_ex2/
+manual_ex3/
+rbo_update/
+thai_backup/
+
+# Windows Executables and Installers
+*.exe
+*.mds
+*.iso
+*.zip
+*.rar
+*.cnf
+*.sav
+*.v2
+*.v3
+*.v4
+*.rv4
+*.iv4
+*.rp4
+*.sim
+*.isu
+*.ico
+*.dat
+*.bat
+!deploy_cloudflare.bat
+!start_web.bat
+*.url
+*.INI
+*.txt
+!README.md
+
+# Original large BMP textures in root
+rbo.bmp
+rbo_ex1.bmp
+rbo_ex2.bmp
+rbo_ex3.bmp
+
+# System and editor caches
+.system_generated/
+.user_uploaded/
+node_modules/
+.DS_Store
+Thumbs.db

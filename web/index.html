@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ragnarok Battle Offline - Web Port & Reverse Engineering Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <div class="logo-icon"></div>
+      <div class="logo-title">
+        <h1>RAGNAROK BATTLE OFFLINE <span>WEB</span></h1>
+      </div>
+      <span class="logo-badge">EX 1-3 Engine</span>
+    </div>
+
+    <nav>
+      <button class="nav-btn active" data-target="tabGame">🎮 Play Game</button>
+      <button class="nav-btn" data-target="tabStudio">🛠️ Asset Studio</button>
+      <button class="nav-btn" data-target="tabDocs">📖 RE Report</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Tab 1: Playable Game Viewport -->
+    <section id="tabGame" class="tab-view active">
+      <!-- Game Mode Selection Bar -->
+      <div class="mode-bar">
+        <button id="modeSolo" class="mode-btn active">👤 1P Solo</button>
+        <button id="modeLocal2P" class="mode-btn">👥 2P Local Co-op</button>
+        <button id="modeOnline" class="mode-btn">🌐 Online Multiplayer</button>
+      </div>
+
+      <div class="game-container" id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Boss Caution Banner Overlay -->
+        <div id="cautionBanner" class="caution-banner">
+          <img src="assets/ui/stage_caution.png" alt="WARNING" />
+          <div class="caution-text">⚠️ DANGER! BOSS APPROACHING ⚠️</div>
+        </div>
+
+        <!-- Online Multiplayer Modal -->
+        <div id="onlineModal" class="online-modal" style="display:none;">
+          <div class="online-card">
+            <h3>🌐 Online Multiplayer Lobby</h3>
+            <p>Connect peer-to-peer (P2P) with a friend anywhere in the world at 60 FPS!</p>
+            
+            <div class="online-actions">
+              <div class="online-box">
+                <h4>Host a Match</h4>
+                <button id="btnCreateRoom" class="action-btn" style="background:#2e7d32; width:100%;">Create New Room</button>
+                <div id="roomInfo" style="display:none; margin-top:10px;">
+                  <div style="font-size:0.85rem; color:#aaa;">ROOM CODE:</div>
+                  <div id="displayRoomCode" class="room-code-badge">RBO-XXXX</div>
+                  <button id="shareLinkBtn" class="action-btn" style="background:#1976d2; width:100%; margin-top:8px;">📋 Copy Invite Link</button>
+                </div>
+              </div>
+
+              <div class="online-divider">OR</div>
+
+              <div class="online-box">
+                <h4>Join a Match</h4>
+                <div style="display:flex; gap:6px;">
+                  <input type="text" id="inputRoomCode" placeholder="Enter Room Code (e.g. RBO-1234)" class="search-input" style="text-transform:uppercase;" />
+                  <button id="btnJoinRoom" class="action-btn" style="background:#f57c00;">Join</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="netStatus" class="net-status">Ready to connect...</div>
+            <button onclick="document.getElementById('onlineModal').style.display='none'" class="close-modal-btn">✖ Close</button>
+          </div>
+        </div>
+
+        <!-- Stage Clear Modal -->
+        <div id="clearModal" class="clear-modal">
+          <div class="clear-card">
+            <div class="clear-title">STAGE CLEAR!</div>
+            <div class="clear-rank" id="clearRank">S</div>
+            <div class="clear-stats">
+              <div class="stat-row">
+                <span>Final Score</span>
+                <span id="finalScore">0</span>
+              </div>
+              <div class="stat-row">
+                <span>Max Combo</span>
+                <span id="maxCombo">0 HITS</span>
+              </div>
+              <div class="stat-row">
+                <span>Player Level</span>
+                <span id="finalLevel">Lv.1</span>
+              </div>
+              <div class="stat-row">
+                <span>Boss Defeated</span>
+                <span style="color:#4caf50;">BAPHOMET (MVP)</span>
+              </div>
+            </div>
+            <button id="btnPlayAgain" class="action-btn" style="padding:10px 24px; font-size:1rem; font-weight:bold; background:var(--primary-gold); color:#000;">🔄 Play Again</button>
+          </div>
+        </div>
+
+        <!-- Game Top Control Bar -->
+        <div class="game-top-bar">
+          <div class="game-controls-hint">
+            <strong>1P:</strong> <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> + <kbd>J</kbd> Light | <kbd>K</kbd> Mid | <kbd>I</kbd> Heavy | <kbd>Space</kbd> Skill &nbsp;|&nbsp; <strong>2P:</strong> <kbd>Arrows</kbd> + <kbd>Num 1</kbd> Light | <kbd>Num 2</kbd> Mid | <kbd>Num 3</kbd> Jump
+            <span id="gamepadIndicator" style="display:none; color:#4caf50; margin-left:8px; font-weight:bold;">🎮 Gamepad Connected</span>
+          </div>
+          <div class="game-actions-bar">
+            <button id="crtBtn" class="filter-btn">📺 CRT: OFF</button>
+            <button id="muteBtn" class="audio-btn">🔊 Sound: ON</button>
+            <button id="restartBtn" class="action-btn">🔄 Restart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Character Selection -->
+      <div class="chara-selector">
+        <div id="charaSwd" class="chara-option selected">
+          <div class="chara-avatar">⚔️</div>
+          <div>
+            <div class="chara-name">Swordman (นักดาบ)</div>
+            <div class="chara-role">Bash / Magnum Break Combo</div>
+          </div>
+        </div>
+        <div id="charaAco" class="chara-option">
+          <div class="chara-avatar">✨</div>
+          <div>
+            <div class="chara-name">Acolyte (นักบวช)</div>
+            <div class="chara-role">Holy Light / Heal / Angelus</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Touch Virtual Gamepad -->
+      <div class="virtual-controls">
+        <div class="dpad">
+          <div></div>
+          <button id="btnUp" class="dpad-btn">▲</button>
+          <div></div>
+          <button id="btnLeft" class="dpad-btn">◀</button>
+          <div></div>
+          <button id="btnRight" class="dpad-btn">▶</button>
+          <div></div>
+          <button id="btnDown" class="dpad-btn">▼</button>
+          <div></div>
+        </div>
+
+        <div class="action-pad">
+          <button id="btnLight" class="act-btn">Z<span>LIGHT</span></button>
+          <button id="btnMid" class="act-btn">X<span>MID</span></button>
+          <button id="btnHeavy" class="act-btn">C<span>HEAVY</span></button>
+          <button id="btnJump" class="act-btn">JUMP<span>SPACE</span></button>
+          <button id="btnSkill1" class="act-btn">A<span>BASH</span></button>
+          <button id="btnSkill2" class="act-btn">S<span>MAGNUM</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Asset Studio & PAC Explorer -->
+    <section id="tabStudio" class="tab-view">
+      <div class="studio-layout">
+        <div class="studio-sidebar">
+          <div class="sidebar-header">
+            <h3>📦 Archive Explorer</h3>
+            <select id="pacSelect" class="pac-select">
+              <option value="">-- Loading Archives... --</option>
+            </select>
+            <input type="text" id="fileSearch" class="search-input" placeholder="Search files (e.g. WAV, PORING)..." />
+          </div>
+          <ul id="fileList" class="file-list"></ul>
+        </div>
+
+        <div class="studio-main">
+          <div id="fileDetails" style="margin-bottom:12px; font-size:0.9rem; color:#bbb;">
+            Select a file from the left to inspect and preview.
+          </div>
+          <div id="previewContainer" class="preview-container">
+            <div style="color:#666; text-align:center;">
+              <div style="font-size:3rem; margin-bottom:8px;">🔍</div>
+              <p>Select any game texture (.IMG) or sound effect (.WAV) to preview.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Reverse Engineering Technical Report -->
+    <section id="tabDocs" class="tab-view">
+      <div class="doc-container">
+        <h2>🛠️ รายงานการ Reverse Engineering: Ragnarok Battle Offline (French-Bread)</h2>
+        <p>
+          โปรเจกต์นี้เป็นการแกะโครงสร้างภายใน (Reverse Engineering) ของตัวเกม <strong>Ragnarok Battle Offline (RBO EX 1-3)</strong> 
+          ที่พัฒนาโดยค่าย <strong>French-Bread (Watanabe Seisakujo)</strong> ในปี 2004–2006 และแปลงโครงสร้างทั้งหมดให้สามารถรันบนเว็บเบราว์เซอร์สมัยใหม่ได้ทันที
+        </p>
+
+        <h3>1. โครงสร้างไฟล์บีบอัด (.PAC Archive)</h3>
+        <p>
+          ไฟล์ทรัพยากรหลักทั้งหมดถูกรวมไว้ในแพ็กเกจ <code>.PAC</code> (เช่น <code>DATA01.PAC</code>, <code>BG01.PAC</code>, <code>SE.PAC</code>) 
+          จากการวิเคราะห์ Binary <code>rbo.exe</code> ที่ออฟเซต <code>0x00022a10 - 0x00022ad0</code> พบขั้นตอนการถอดรหัสและโครงสร้างดังนี้:
+        </p>
+        <table>
+          <thead>
+            <tr><th>ออฟเซต (Offset)</th><th>ขนาด</th><th>คำอธิบาย</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>0x00 - 0x03</code></td><td>4 Bytes</td><td>Version Header (ค่าคงที่ <code>0x00000001</code>)</td></tr>
+            <tr><td><code>0x04 - 0x07</code></td><td>4 Bytes</td><td>จำนวนไฟล์ในแพ็ก (XOR Key: <code>0xE3DF59AC</code>)</td></tr>
+            <tr><td><code>0x08 - ...</code></td><td>FileCount * 68 Bytes</td><td>ตารางสารบัญไฟล์ (File Allocation Table) ขนาดแถวละ 68 Bytes</td></tr>
+          </tbody>
+        </table>
+
+        <h4>สูตรการถอดรหัสชื่อไฟล์ (Rotating Stream Cipher):</h4>
+        <pre><code>// สำหรับไฟล์ลำดับที่ i และตัวอักษรตำแหน่งที่ c (0..58):
+const key = ((i * c * 3) + 0x3d) & 0xff;
+const decryptedChar = entryBytes[c] ^ key;</code></pre>
+
+        <h4>สูตรการถอดรหัสขนาดและตำแหน่งไฟล์:</h4>
+        <pre><code>const fileOffset = entry.readUInt32LE(0x3c);
+const fileSize   = entry.readUInt32LE(0x40) ^ 0xe3df59ac;</code></pre>
+
+        <h3>2. โครงสร้างไฟล์รูปภาพและฉาก (.IMG)</h3>
+        <p>
+          ไฟล์ <code>.IMG</code> เก็บภาพพื้นหลัง (Background) และ UI ในรูปแบบ Raw 32-bit BGRA Surface (DirectDraw 7 Surface) 
+          โดยมี Header ขนาด 20 Bytes:
+        </p>
+        <table>
+          <thead>
+            <tr><th>ฟิลด์</th><th>ชนิดข้อมูล</th><th>คำอธิบาย</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Header[0..2]</code></td><td>3x uint32</td><td>Format descriptor & Channel flags (0, 7, 2)</td></tr>
+            <tr><td><code>Width</code></td><td>uint32 (Offset 12)</td><td>ความกว้างของภาพ (เช่น 512, 1024, 2048)</td></tr>
+            <tr><td><code>Height</code></td><td>uint32 (Offset 16)</td><td>ความสูงของภาพ (เช่น 512, 1024)</td></tr>
+            <tr><td><code>Pixels</code></td><td>Width * Height * 4 Bytes</td><td>Pixel Data เรียงแบบ B, G, R, A ทีละไบต์</td></tr>
+          </tbody>
+        </table>
+
+        <h3>3. โครงสร้างตัวละครและแอนิเมชัน (.DAT / HAN2RBO)</h3>
+        <p>
+          ข้อมูลตัวละครใน <code>DATA02.PAC</code> (เช่น <code>SWORDMAN_M.DAT</code>, <code>ACOLYTE_F.DAT</code>) เป็นโครงสร้าง <strong>Hantei 2 (HAN2)</strong> 
+          ซึ่งแบ่งออกเป็น 5 ส่วนหลัก:
+        </p>
+        <ul>
+          <li><strong>0x40 - 0x4B868:</strong> Pattern & Hitbox Definition (กล่องชน, กล่องรับดาเมจ, ระยะโจมตี)</li>
+          <li><strong>0x4B8A8 - ...:</strong> Frame Sequence Timeline (ลำดับเฟรมและเวลาแสดงผล)</li>
+          <li><strong>BMP Cutter3 Section:</strong> สารบัญพิกัดตัดสไปรต์ (Sprite Slicing Coordinates) พร้อม 16 Color Palettes (โดยสีแรกคือ <code>0x00FF00</code> หรือ Green Key เพื่อทำ Transparency)</li>
+          <li><strong>8-bit Paletted Texture Sheets:</strong> แผ่นสไปรต์ขนาด 512x512 พิกเซล เก็บเป็น Index 0-255 โดยแปลงผ่าน Palette 256 สี</li>
+          <li><strong>Shift-JIS Animation States:</strong> ตารางชื่อท่าโจมตีและการเคลื่อนไหวภาษาญี่ปุ่น เช่น <code>立ち</code> (ยืน), <code>前進</code> (เดินหน้า), <code>立ち弱攻撃</code> (ฟันเบา), <code>立ち中攻撃</code> (ฟันกลาง), <code>立ち強攻撃</code> (ฟันหนัก)</li>
+        </ul>
+
+        <h3>4. การพอร์ตสู่เว็บบราวเซอร์ (Web Port Architecture)</h3>
+        <p>
+          ตัวเกมเวอร์ชันเว็บทำงานผ่าน <strong>HTML5 Canvas 2D + Web Audio API + Gamepad API</strong> 
+          โดยนำไฟล์ Background จาก <code>BG01.PAC</code>, เสียงจาก <code>SE.PAC</code>, ดนตรีจาก <code>BGM.PAC</code> 
+          และสไปรต์ตัวละครมาประกอบเป็น Beat 'em up Game Engine ที่รันที่ 60 FPS บนทุกอุปกรณ์ (Desktop, Mobile, Tablet, Gamepad)!
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="netcode.js"></script>
+  <script src="engine.js"></script>
+  <script src="studio.js"></script>
+</body>
+</html>
