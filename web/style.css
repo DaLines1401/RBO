@@ -794,3 +794,200 @@ main {
   background: #2d3748;
   color: #fff;
 }
+
+
+/* --- Real Character Selection Lobby (RBO Roster) --- */
+.chara-selector-container {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 14px;
+  background: #141923;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.chara-selector-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chara-selector-header h3 {
+  font-size: 1rem;
+  color: var(--primary-gold);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.player-select-tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.tab-p-btn {
+  background: #1f2736;
+  border: 1px solid #3b465d;
+  color: #a0aec0;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-p-btn:hover {
+  background: #2a354a;
+  color: #fff;
+}
+
+.tab-p-btn.active#btnTabP1 {
+  background: #0288d1;
+  color: #fff;
+  border-color: #40c4ff;
+  box-shadow: 0 0 10px rgba(64, 196, 255, 0.5);
+}
+
+.tab-p-btn.active#btnTabP2 {
+  background: #d32f2f;
+  color: #fff;
+  border-color: #ff5252;
+  box-shadow: 0 0 10px rgba(255, 82, 82, 0.5);
+}
+
+.chara-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.chara-card {
+  background: #1a2230;
+  border: 2px solid #2d3748;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chara-card:hover {
+  border-color: #4a5568;
+  transform: translateY(-2px);
+  background: #222c3d;
+}
+
+.chara-card.selected {
+  border-color: var(--primary-gold);
+  background: #242c3d;
+  box-shadow: 0 0 14px rgba(226, 176, 74, 0.35);
+}
+
+.chara-card.p2-selected {
+  border-color: #ff5252;
+  box-shadow: 0 0 14px rgba(255, 82, 82, 0.4);
+}
+
+.card-gender {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.card-gender.male {
+  background: rgba(64, 196, 255, 0.15);
+  color: #40c4ff;
+  border: 1px solid rgba(64, 196, 255, 0.4);
+}
+
+.card-gender.female {
+  background: rgba(244, 143, 177, 0.15);
+  color: #f48fb1;
+  border: 1px solid rgba(244, 143, 177, 0.4);
+}
+
+.card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.card-title {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.card-stats {
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  margin-top: 4px;
+  background: #0f141e;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.card-skills {
+  font-size: 0.72rem;
+  color: #69f0ae;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+/* Command Motion Guide */
+.command-guide {
+  background: #0d121a;
+  border: 1px dashed #2d3748;
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #cbd5e0;
+}
+
+.cmd-pill {
+  background: #1a2230;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+.cmd-pill kbd {
+  background: #0f172a;
+  color: #38bdf8;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid #475569;
+  font-family: monospace;
+  font-size: 0.75rem;
+}

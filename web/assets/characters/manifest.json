@@ -1,0 +1,84 @@
+{
+  "characters": {
+    "SWD_M": {
+      "id": "SWD_M",
+      "class": "SWORDMAN",
+      "gender": "M",
+      "name": "Swordman (ชาย)",
+      "title": "นักดาบหนุ่มผู้กล้าหาญ",
+      "description": "พลังป้องกันและพลังโจมตีกายภาพสูง เหมาะกับการลุยเดี่ยวและทำคอมโบหนักหน่วง",
+      "stats": { "str": 85, "agi": 60, "vit": 90, "int": 25, "dex": 55, "luk": 40 },
+      "baseHp": 1350,
+      "baseSp": 220,
+      "sheets": [
+        "assets/characters/swd_m_sheet_0.png",
+        "assets/characters/swd_m_sheet_1.png",
+        "assets/characters/swd_m_sheet_2.png"
+      ],
+      "skills": [
+        { "id": "BASH", "name": "Bash (ฟันกระแทก)", "command": "↓ ↘ → + Light", "shortcut": "Space / A", "sp": 25, "damage": 380 },
+        { "id": "MAGNUM", "name": "Magnum Break (ระเบิดไฟ)", "command": "↓ ↑ + Heavy", "shortcut": "U / S", "sp": 45, "damage": 550 }
+      ]
+    },
+    "SWD_F": {
+      "id": "SWD_F",
+      "class": "SWORDMAN",
+      "gender": "F",
+      "name": "Swordman (หญิง)",
+      "title": "นักดาบสาวผู้ปราดเปรียว",
+      "description": "มีความเร็วการฟันและพุ่งตัวที่ว่องไว ออกคอมโบต่อเนื่องได้รวดเร็วกว่าสายชาย",
+      "stats": { "str": 80, "agi": 75, "vit": 75, "int": 30, "dex": 65, "luk": 45 },
+      "baseHp": 1250,
+      "baseSp": 240,
+      "sheets": [
+        "assets/characters/swd_f_sheet_0.png",
+        "assets/characters/swd_f_sheet_1.png",
+        "assets/characters/swd_f_sheet_2.png"
+      ],
+      "skills": [
+        { "id": "BASH", "name": "Bash (ฟันกระแทก)", "command": "↓ ↘ → + Light", "shortcut": "Space / A", "sp": 25, "damage": 360 },
+        { "id": "MAGNUM", "name": "Magnum Break (ระเบิดไฟ)", "command": "↓ ↑ + Heavy", "shortcut": "U / S", "sp": 45, "damage": 530 }
+      ]
+    },
+    "ACO_M": {
+      "id": "ACO_M",
+      "class": "ACOLYTE",
+      "gender": "M",
+      "name": "Acolyte (ชาย)",
+      "title": "นักบวชสายประชิด (Battle Priest)",
+      "description": "ใช้เพลงหมัดอันทรงพลัง ผสานพลังเวทศักดิ์สิทธิ์และการชุบชีวิตเพื่อนร่วมทีม",
+      "stats": { "str": 70, "agi": 65, "vit": 70, "int": 80, "dex": 60, "luk": 50 },
+      "baseHp": 1150,
+      "baseSp": 340,
+      "sheets": [
+        "assets/characters/aco_m_sheet_0.png",
+        "assets/characters/aco_m_sheet_1.png",
+        "assets/characters/aco_m_sheet_2.png"
+      ],
+      "skills": [
+        { "id": "HOLY_LIGHT", "name": "Holy Light (แสงศักดิ์สิทธิ์)", "command": "↓ ↘ → + Light", "shortcut": "Space / A", "sp": 20, "damage": 310 },
+        { "id": "HEAL", "name": "Heal & Angelus (ฮีลและชุบ)", "command": "↓ ↑ + Heavy", "shortcut": "U / S", "sp": 40, "damage": 0 }
+      ]
+    },
+    "ACO_F": {
+      "id": "ACO_F",
+      "class": "ACOLYTE",
+      "gender": "F",
+      "name": "Acolyte (หญิง)",
+      "title": "นักบวชสาวผู้เปี่ยมศรัทธา",
+      "description": "มีปริมาณ SP สูงสุดในสายเริ่มต้น สามารถฟื้นฟูเลือดและบัฟเกราะให้เพื่อนได้อย่างต่อเนื่อง",
+      "stats": { "str": 60, "agi": 60, "vit": 65, "int": 95, "dex": 65, "luk": 60 },
+      "baseHp": 1100,
+      "baseSp": 380,
+      "sheets": [
+        "assets/characters/aco_f_sheet_0.png",
+        "assets/characters/aco_f_sheet_1.png",
+        "assets/characters/aco_f_sheet_2.png"
+      ],
+      "skills": [
+        { "id": "HOLY_LIGHT", "name": "Holy Light (แสงศักดิ์สิทธิ์)", "command": "↓ ↘ → + Light", "shortcut": "Space / A", "sp": 20, "damage": 330 },
+        { "id": "HEAL", "name": "Heal & Angelus (ฮีลและชุบ)", "command": "↓ ↑ + Heavy", "shortcut": "U / S", "sp": 40, "damage": 0 }
+      ]
+    }
+  }
+}

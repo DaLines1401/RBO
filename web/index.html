@@ -116,21 +116,79 @@
         </div>
       </div>
 
-      <!-- Character Selection -->
-      <div class="chara-selector">
-        <div id="charaSwd" class="chara-option selected">
-          <div class="chara-avatar">⚔️</div>
-          <div>
-            <div class="chara-name">Swordman (นักดาบ)</div>
-            <div class="chara-role">Bash / Magnum Break Combo</div>
+      <!-- Real Characters Selection & Roster -->
+      <div class="chara-selector-container">
+        <div class="chara-selector-header">
+          <h3>👥 SELECT CHARACTER / เลือกตัวละครจริง (RBO Roster)</h3>
+          <div class="player-select-tabs">
+            <button id="btnTabP1" class="tab-p-btn active">👤 1P Active</button>
+            <button id="btnTabP2" class="tab-p-btn">👥 2P Active</button>
           </div>
         </div>
-        <div id="charaAco" class="chara-option">
-          <div class="chara-avatar">✨</div>
-          <div>
-            <div class="chara-name">Acolyte (นักบวช)</div>
-            <div class="chara-role">Holy Light / Heal / Angelus</div>
+
+        <div class="chara-grid">
+          <!-- 1. Swordman Male -->
+          <div id="card_SWD_M" class="chara-card selected" data-char="SWD_M">
+            <div class="card-gender male">♂ ชาย</div>
+            <div class="card-icon">⚔️</div>
+            <div class="card-info">
+              <div class="card-name">Swordman (ชาย)</div>
+              <div class="card-title">นักดาบหนุ่มผู้กล้าหาญ</div>
+              <div class="card-stats">
+                <span>HP: 1,350</span> | <span style="color:#e2b04a;">STR 85</span> | <span style="color:#81d4fa;">VIT 90</span>
+              </div>
+              <div class="card-skills">⚡ Bash / Magnum Break</div>
+            </div>
           </div>
+
+          <!-- 2. Swordman Female -->
+          <div id="card_SWD_F" class="chara-card" data-char="SWD_F">
+            <div class="card-gender female">♀ หญิง</div>
+            <div class="card-icon">🗡️</div>
+            <div class="card-info">
+              <div class="card-name">Swordman (หญิง)</div>
+              <div class="card-title">นักดาบสาวผู้ปราดเปรียว</div>
+              <div class="card-stats">
+                <span>HP: 1,250</span> | <span style="color:#69f0ae;">AGI 75</span> | <span style="color:#e2b04a;">STR 80</span>
+              </div>
+              <div class="card-skills">⚡ Swift Combos / Bash</div>
+            </div>
+          </div>
+
+          <!-- 3. Acolyte Male -->
+          <div id="card_ACO_M" class="chara-card" data-char="ACO_M">
+            <div class="card-gender male">♂ ชาย</div>
+            <div class="card-icon">👊</div>
+            <div class="card-info">
+              <div class="card-name">Acolyte (ชาย)</div>
+              <div class="card-title">นักบวชสายประชิด (Battle Monk)</div>
+              <div class="card-stats">
+                <span>HP: 1,150</span> | <span style="color:#e2b04a;">STR 70</span> | <span style="color:#40c4ff;">INT 80</span>
+              </div>
+              <div class="card-skills">✨ Holy Light / Heal & Revive</div>
+            </div>
+          </div>
+
+          <!-- 4. Acolyte Female -->
+          <div id="card_ACO_F" class="chara-card" data-char="ACO_F">
+            <div class="card-gender female">♀ หญิง</div>
+            <div class="card-icon">✨</div>
+            <div class="card-info">
+              <div class="card-name">Acolyte (หญิง)</div>
+              <div class="card-title">นักบวชสาวผู้เปี่ยมศรัทธา</div>
+              <div class="card-stats">
+                <span>HP: 1,100</span> | <span style="color:#40c4ff;">INT 95</span> | <span style="color:#80d8ff;">SP 380</span>
+              </div>
+              <div class="card-skills">✨ High SP Support / Heal / Angelus</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Command Motion Guide -->
+        <div class="command-guide">
+          <span><strong>🎮 Special Command Motion:</strong></span>
+          <span class="cmd-pill">Bash / Holy Light: <kbd>↓</kbd> <kbd>→</kbd> + <kbd>Light</kbd> หรือ <kbd>Space</kbd></span>
+          <span class="cmd-pill">Magnum Break / Heal: <kbd>↓</kbd> <kbd>↑</kbd> + <kbd>Heavy</kbd> หรือ <kbd>U</kbd></span>
         </div>
       </div>
 

@@ -396,4 +396,8 @@ function startServer(port) {
   });
 }
 
-startServer(PORT);
+if (require.main === module) {
+  startServer(PORT);
+}
+module.exports = server;
+

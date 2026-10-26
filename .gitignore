@@ -47,3 +47,5 @@ rbo_ex3.bmp
 node_modules/
 .DS_Store
 Thumbs.db
+
+.wrangler/
