@@ -345,8 +345,122 @@ class RBOEngine {
       }
     }
 
+    // Pre-cache character animations
+    this.charAnimCaches = {};
+    try {
+      const mRes = await fetch('assets/characters/manifest.json');
+      this.charManifest = await mRes.json();
+      await this.cacheCharacterAnimation('SWD_M');
+      await this.cacheCharacterAnimation('ACO_F');
+      setTimeout(async () => {
+        const others = ['SWD_F', 'ACO_M', 'ARC_M', 'ARC_F', 'MAG_M', 'MAG_F', 'THF_M', 'THF_F', 'MRC_M', 'MRC_F', 'NOV_M', 'NOV_F'];
+        for (const cid of others) {
+          await this.cacheCharacterAnimation(cid);
+        }
+      }, 300);
+    } catch(err) {
+      console.warn('Could not initialize character animation cache:', err);
+    }
+
     this.assetsLoaded = true;
     if (onComplete) onComplete();
+  }
+
+  async cacheCharacterAnimation(charId) {
+    if (!this.charAnimCaches) this.charAnimCaches = {};
+    if (this.charAnimCaches[charId]) return this.charAnimCaches[charId];
+
+    if (!this.charManifest) {
+      try {
+        const res = await fetch('assets/characters/manifest.json');
+        this.charManifest = await res.json();
+      } catch(e) {
+        return null;
+      }
+    }
+
+    const charDef = this.charManifest && this.charManifest.characters
+      ? (this.charManifest.characters[charId] || Object.values(this.charManifest.characters).find(c => c.id === charId))
+      : null;
+    if (!charDef) return null;
+
+    try {
+      const posesRes = await fetch(charDef.posesData);
+      const poses = await posesRes.json();
+
+      const sheets = await Promise.all(charDef.sheets.map(src => {
+        return new Promise(resolve => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = () => resolve(null);
+          img.src = src;
+        });
+      }));
+
+      const renderPose = (poseIndex, width = 180, height = 180) => {
+        let pose = poses[poseIndex];
+        if (!pose) pose = poses[0];
+        if (!pose) return null;
+
+        const off = document.createElement('canvas');
+        off.width = width;
+        off.height = height;
+        const ctx = off.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+
+        const cx = width / 2;
+        const cy = height * 0.85;
+
+        for (const part of pose.parts) {
+          const [sheetIdx, srcX, srcY, srcW, srcH, destX, destY, destW, destH, origX, origY, rot, flip] = part;
+          const sheet = sheets[sheetIdx];
+          if (!sheet || !sheet.complete || srcW <= 0 || srcH <= 0) continue;
+
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.translate(destX + origX, destY + origY);
+          if (rot !== 0) ctx.rotate((rot * Math.PI) / 180);
+          const scaleX = (flip & 1) ? -1 : 1;
+          const scaleY = (flip & 2) ? -1 : 1;
+          ctx.scale(scaleX, scaleY);
+          ctx.translate(-origX, -origY);
+
+          const drawW = Math.abs(destW) || srcW;
+          const drawH = Math.abs(destH) || srcH;
+          ctx.drawImage(sheet, srcX, srcY, srcW, srcH, 0, 0, drawW, drawH);
+          ctx.restore();
+        }
+        return off;
+      };
+
+      const findIdx = (kw, fallback) => {
+        const found = poses.findIndex(p => p.name && p.name.toUpperCase().includes(kw));
+        return found !== -1 ? found : fallback;
+      };
+
+      const cache = {
+        IDLE: [renderPose(0), renderPose(1), renderPose(2), renderPose(1)],
+        WALK: [
+          renderPose(findIdx('WORK_FR', 3)),
+          renderPose(findIdx('PATTERN006', 4)),
+          renderPose(findIdx('PATTERN007', 5)),
+          renderPose(findIdx('PATTERN008', 6))
+        ],
+        JUMP: [renderPose(findIdx('JUMP', 29))],
+        ATTACK_LIGHT: [renderPose(findIdx('ATTACK', 60))],
+        ATTACK_MID: [renderPose(findIdx('ATTACK', 62))],
+        ATTACK_HEAVY: [renderPose(findIdx('ATTACK', 65))],
+        SKILL_1: [renderPose(findIdx('BASH', 70))],
+        SKILL_2: [renderPose(findIdx('MAGNUM', 75))],
+        KO: [renderPose(findIdx('DOWN', 18))]
+      };
+
+      this.charAnimCaches[charId] = cache;
+      return cache;
+    } catch(err) {
+      console.warn(`Error generating cache for ${charId}:`, err);
+      return null;
+    }
   }
 
   initControls() {
@@ -532,6 +646,7 @@ class RBOEngine {
       p.maxSp = def.baseSp;
       p.sp = Math.min(p.sp, def.baseSp);
     }
+    this.cacheCharacterAnimation(def.id);
   }
 
   // --- Input Mapping per Player ---
@@ -1449,83 +1564,101 @@ class RBOEngine {
     ctx.ellipse(0, 0, 28, 8, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    const charKey = (p.charaId ? p.charaId.toLowerCase() : (p.chara === 'ACOLYTE' ? 'aco_f' : 'swd_m')) + '_sheet_0';
-    const charaTex = this.images[charKey] || (p.chara === 'ACOLYTE' ? this.images.aco_tex : this.images.swd_tex);
+    const charId = p.charaId || (p.chara === 'ACOLYTE' ? 'ACO_F' : 'SWD_M');
+    const animCache = this.charAnimCaches && this.charAnimCaches[charId];
 
-    if (charaTex) {
-      let sw = 105, sh = 115;
+    if (animCache) {
+      let frameList = animCache.IDLE;
+      let frameIdx = 0;
+
       if (p.state === 'KO') {
-        // KO on ground
-        ctx.drawImage(charaTex, 0, 25, sw, sh, -52, -45, sw, 50);
+        frameList = animCache.KO || animCache.IDLE;
+        frameIdx = 0;
       } else if (p.state === 'IDLE') {
-        const bob = Math.sin(p.stateTime * 0.12) * 2;
-        ctx.drawImage(charaTex, 0, 25, sw, sh, -52, -112 + bob, sw, sh);
+        frameList = animCache.IDLE;
+        frameIdx = Math.floor(p.stateTime / 10) % frameList.length;
       } else if (p.state === 'WALK' || p.state === 'DASH') {
-        const step = Math.floor((p.stateTime / 6) % 4);
-        ctx.drawImage(charaTex, step * 100, 25, sw, sh, -52, -114, sw, sh);
+        frameList = animCache.WALK;
+        frameIdx = Math.floor(p.stateTime / 6) % frameList.length;
       } else if (p.state === 'JUMP') {
-        ctx.drawImage(charaTex, 150, 25, sw, sh, -52, -122, sw, sh);
+        frameList = animCache.JUMP;
+        frameIdx = 0;
       } else if (p.state === 'ATTACK_LIGHT') {
-        ctx.drawImage(charaTex, 240, 25, 115, sh, -48, -115, 115, sh);
-        ctx.strokeStyle = 'rgba(255, 235, 59, 0.85)';
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.arc(10, -50, 50, -Math.PI * 0.3, Math.PI * 0.2);
-        ctx.stroke();
+        frameList = animCache.ATTACK_LIGHT || animCache.IDLE;
+        frameIdx = 0;
       } else if (p.state === 'ATTACK_MID') {
-        ctx.drawImage(charaTex, 350, 25, 120, sh, -45, -118, 120, sh);
-        ctx.strokeStyle = 'rgba(255, 193, 7, 0.95)';
-        ctx.lineWidth = 6;
-        ctx.beginPath();
-        ctx.arc(15, -55, 62, -Math.PI * 0.5, Math.PI * 0.3);
-        ctx.stroke();
+        frameList = animCache.ATTACK_MID || animCache.IDLE;
+        frameIdx = 0;
       } else if (p.state === 'ATTACK_HEAVY') {
-        ctx.drawImage(charaTex, 240, 25, 120, sh, -42, -120, 125, sh);
-        ctx.strokeStyle = 'rgba(64, 196, 255, 0.95)';
-        ctx.lineWidth = 8;
-        ctx.beginPath();
-        ctx.arc(20, -55, 75, -Math.PI * 0.6, Math.PI * 0.4);
-        ctx.stroke();
+        frameList = animCache.ATTACK_HEAVY || animCache.IDLE;
+        frameIdx = 0;
       } else if (p.state === 'SKILL_1') {
-        // Skill 1 (Bash or Holy Light)
-        ctx.drawImage(charaTex, 240, 25, 120, sh, -42, -120, 125, sh);
-        if (p.chara === 'SWORDMAN') {
-          ctx.strokeStyle = 'rgba(255, 215, 0, 0.95)';
-          ctx.lineWidth = 10;
-          ctx.beginPath();
-          ctx.arc(25, -55, 85, -Math.PI * 0.65, Math.PI * 0.45);
-          ctx.stroke();
-        } else {
-          const grad = ctx.createLinearGradient(30, -180, 30, 0);
-          grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
-          grad.addColorStop(0.5, 'rgba(128, 222, 234, 0.8)');
-          grad.addColorStop(1, 'rgba(255, 255, 255, 0.95)');
-          ctx.fillStyle = grad;
-          ctx.fillRect(10, -160, 40, 160);
-        }
+        frameList = animCache.SKILL_1 || animCache.IDLE;
+        frameIdx = 0;
       } else if (p.state === 'SKILL_2') {
-        // Skill 2 (Magnum Break or Heal & Angelus)
-        ctx.drawImage(charaTex, 350, 25, 125, sh, -45, -122, 125, sh);
-        if (p.chara === 'SWORDMAN') {
-          const prog = Math.min(1, p.stateTime / 20);
-          ctx.strokeStyle = `rgba(255, 87, 34, ${1 - prog * 0.8})`;
-          ctx.lineWidth = 8;
-          ctx.beginPath();
-          ctx.ellipse(0, -20, 40 + prog * 100, 20 + prog * 40, 0, 0, Math.PI * 2);
-          ctx.stroke();
-        } else {
-          ctx.strokeStyle = 'rgba(105, 240, 174, 0.85)';
-          ctx.lineWidth = 5;
-          ctx.beginPath();
-          ctx.arc(0, -55, 55, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-      } else {
-        ctx.drawImage(charaTex, 0, 25, sw, sh, -52, -112, sw, sh);
+        frameList = animCache.SKILL_2 || animCache.IDLE;
+        frameIdx = 0;
+      }
+
+      const frame = (frameList && frameList[frameIdx]) || (animCache.IDLE && animCache.IDLE[0]);
+      if (frame) {
+        ctx.drawImage(frame, -frame.width / 2, -frame.height * 0.85);
       }
     } else {
       ctx.fillStyle = p.chara === 'ACOLYTE' ? '#81d4fa' : '#ef5350';
-      ctx.fillRect(-18, -80, 36, 75);
+      ctx.beginPath();
+      ctx.roundRect(-20, -90, 40, 80, 8);
+      ctx.fill();
+    }
+
+    if (p.state === 'ATTACK_LIGHT') {
+      ctx.strokeStyle = 'rgba(255, 235, 59, 0.85)';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(10, -50, 50, -Math.PI * 0.3, Math.PI * 0.2);
+      ctx.stroke();
+    } else if (p.state === 'ATTACK_MID') {
+      ctx.strokeStyle = 'rgba(255, 193, 7, 0.95)';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.arc(15, -55, 62, -Math.PI * 0.5, Math.PI * 0.3);
+      ctx.stroke();
+    } else if (p.state === 'ATTACK_HEAVY') {
+      ctx.strokeStyle = 'rgba(64, 196, 255, 0.95)';
+      ctx.lineWidth = 8;
+      ctx.beginPath();
+      ctx.arc(20, -55, 75, -Math.PI * 0.6, Math.PI * 0.4);
+      ctx.stroke();
+    } else if (p.state === 'SKILL_1') {
+      if (p.chara === 'SWORDMAN') {
+        ctx.strokeStyle = 'rgba(255, 215, 0, 0.95)';
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.arc(25, -55, 85, -Math.PI * 0.65, Math.PI * 0.45);
+        ctx.stroke();
+      } else {
+        const grad = ctx.createLinearGradient(30, -180, 30, 0);
+        grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
+        grad.addColorStop(0.5, 'rgba(128, 222, 234, 0.8)');
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0.95)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(10, -160, 40, 160);
+      }
+    } else if (p.state === 'SKILL_2') {
+      if (p.chara === 'SWORDMAN') {
+        const prog = Math.min(1, p.stateTime / 20);
+        ctx.strokeStyle = `rgba(255, 87, 34, ${1 - prog * 0.8})`;
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.ellipse(0, -20, 40 + prog * 100, 20 + prog * 40, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      } else {
+        ctx.strokeStyle = 'rgba(105, 240, 174, 0.85)';
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.arc(0, -55, 55, 0, Math.PI * 2);
+        ctx.stroke();
+      }
     }
 
     ctx.restore();

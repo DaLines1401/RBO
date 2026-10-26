@@ -44,7 +44,7 @@ function setupSubnav() {
   btnPac.addEventListener('click', () => {
     btnPac.classList.add('active');
     btnPacNyx.classList.remove('active');
-    viewPac.style.display = 'flex';
+    viewPac.style.display = 'grid';
     viewPacNyx.style.display = 'none';
   });
 
@@ -52,7 +52,7 @@ function setupSubnav() {
     btnPacNyx.classList.add('active');
     btnPac.classList.remove('active');
     viewPac.style.display = 'none';
-    viewPacNyx.style.display = 'flex';
+    viewPacNyx.style.display = 'grid';
     renderCurrentPose();
   });
 }

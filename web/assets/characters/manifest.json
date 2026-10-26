@@ -10,10 +10,12 @@
       "sheets": [
         "assets/characters/swd_m_sheet_0.png",
         "assets/characters/swd_m_sheet_1.png",
-        "assets/characters/swd_m_sheet_2.png"
+        "assets/characters/swd_m_sheet_2.png",
+        "assets/characters/swd_m_sheet_3.png",
+        "assets/characters/swd_m_sheet_4.png"
       ],
       "posesData": "assets/characters/swd_m_poses.json",
-      "poseCount": 435
+      "poseCount": 440
     },
     "SWD_F": {
       "id": "SWD_F",
@@ -25,10 +27,12 @@
       "sheets": [
         "assets/characters/swd_f_sheet_0.png",
         "assets/characters/swd_f_sheet_1.png",
-        "assets/characters/swd_f_sheet_2.png"
+        "assets/characters/swd_f_sheet_2.png",
+        "assets/characters/swd_f_sheet_3.png",
+        "assets/characters/swd_f_sheet_4.png"
       ],
       "posesData": "assets/characters/swd_f_poses.json",
-      "poseCount": 425
+      "poseCount": 430
     },
     "ACO_M": {
       "id": "ACO_M",
@@ -40,10 +44,12 @@
       "sheets": [
         "assets/characters/aco_m_sheet_0.png",
         "assets/characters/aco_m_sheet_1.png",
-        "assets/characters/aco_m_sheet_2.png"
+        "assets/characters/aco_m_sheet_2.png",
+        "assets/characters/aco_m_sheet_3.png",
+        "assets/characters/aco_m_sheet_4.png"
       ],
       "posesData": "assets/characters/aco_m_poses.json",
-      "poseCount": 404
+      "poseCount": 418
     },
     "ACO_F": {
       "id": "ACO_F",
@@ -55,10 +61,12 @@
       "sheets": [
         "assets/characters/aco_f_sheet_0.png",
         "assets/characters/aco_f_sheet_1.png",
-        "assets/characters/aco_f_sheet_2.png"
+        "assets/characters/aco_f_sheet_2.png",
+        "assets/characters/aco_f_sheet_3.png",
+        "assets/characters/aco_f_sheet_4.png"
       ],
       "posesData": "assets/characters/aco_f_poses.json",
-      "poseCount": 467
+      "poseCount": 482
     },
     "ARC_M": {
       "id": "ARC_M",
@@ -69,8 +77,7 @@
       "baseSp": 280,
       "sheets": [
         "assets/characters/arc_m_sheet_0.png",
-        "assets/characters/arc_m_sheet_1.png",
-        "assets/characters/arc_m_sheet_2.png"
+        "assets/characters/arc_m_sheet_1.png"
       ],
       "posesData": "assets/characters/arc_m_poses.json",
       "poseCount": 489
@@ -84,8 +91,7 @@
       "baseSp": 300,
       "sheets": [
         "assets/characters/arc_f_sheet_0.png",
-        "assets/characters/arc_f_sheet_1.png",
-        "assets/characters/arc_f_sheet_2.png"
+        "assets/characters/arc_f_sheet_1.png"
       ],
       "posesData": "assets/characters/arc_f_poses.json",
       "poseCount": 398
@@ -99,8 +105,7 @@
       "baseSp": 450,
       "sheets": [
         "assets/characters/mag_m_sheet_0.png",
-        "assets/characters/mag_m_sheet_1.png",
-        "assets/characters/mag_m_sheet_2.png"
+        "assets/characters/mag_m_sheet_1.png"
       ],
       "posesData": "assets/characters/mag_m_poses.json",
       "poseCount": 430
@@ -118,7 +123,7 @@
         "assets/characters/mag_f_sheet_2.png"
       ],
       "posesData": "assets/characters/mag_f_poses.json",
-      "poseCount": 381
+      "poseCount": 396
     },
     "THF_M": {
       "id": "THF_M",
@@ -129,8 +134,7 @@
       "baseSp": 230,
       "sheets": [
         "assets/characters/thf_m_sheet_0.png",
-        "assets/characters/thf_m_sheet_1.png",
-        "assets/characters/thf_m_sheet_2.png"
+        "assets/characters/thf_m_sheet_1.png"
       ],
       "posesData": "assets/characters/thf_m_poses.json",
       "poseCount": 373
@@ -144,8 +148,7 @@
       "baseSp": 250,
       "sheets": [
         "assets/characters/thf_f_sheet_0.png",
-        "assets/characters/thf_f_sheet_1.png",
-        "assets/characters/thf_f_sheet_2.png"
+        "assets/characters/thf_f_sheet_1.png"
       ],
       "posesData": "assets/characters/thf_f_poses.json",
       "poseCount": 470
@@ -160,7 +163,8 @@
       "sheets": [
         "assets/characters/mrc_m_sheet_0.png",
         "assets/characters/mrc_m_sheet_1.png",
-        "assets/characters/mrc_m_sheet_2.png"
+        "assets/characters/mrc_m_sheet_2.png",
+        "assets/characters/mrc_m_sheet_3.png"
       ],
       "posesData": "assets/characters/mrc_m_poses.json",
       "poseCount": 612
@@ -175,7 +179,8 @@
       "sheets": [
         "assets/characters/mrc_f_sheet_0.png",
         "assets/characters/mrc_f_sheet_1.png",
-        "assets/characters/mrc_f_sheet_2.png"
+        "assets/characters/mrc_f_sheet_2.png",
+        "assets/characters/mrc_f_sheet_3.png"
       ],
       "posesData": "assets/characters/mrc_f_poses.json",
       "poseCount": 542
@@ -189,8 +194,7 @@
       "baseSp": 200,
       "sheets": [
         "assets/characters/nov_m_sheet_0.png",
-        "assets/characters/nov_m_sheet_1.png",
-        "assets/characters/nov_m_sheet_2.png"
+        "assets/characters/nov_m_sheet_1.png"
       ],
       "posesData": "assets/characters/nov_m_poses.json",
       "poseCount": 402
@@ -204,8 +208,7 @@
       "baseSp": 210,
       "sheets": [
         "assets/characters/nov_f_sheet_0.png",
-        "assets/characters/nov_f_sheet_1.png",
-        "assets/characters/nov_f_sheet_2.png"
+        "assets/characters/nov_f_sheet_1.png"
       ],
       "posesData": "assets/characters/nov_f_poses.json",
       "poseCount": 460
